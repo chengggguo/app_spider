@@ -19,12 +19,16 @@ import json
 import requests
 import json
 
-# 百度人脸识别
+# 百度图像
 # https://console.bce.baidu.com
 
-appid = '你申请的appid'
-api_key = '你申请的api_key'
-secret_key = '你申请的secret_key'
+appid = '22783415d'
+api_key = '9l0AEw61zdSjNEPkX1WKxEVI'
+secret_key = 'ZLAoRjDqdVsO8MlifVGjVK87G6LrHuAB'
+
+# appid = '你申请的appid'
+# api_key = '你申请的api_key'
+# secret_key = '你申请的secret_key'
 
 # 图片类型【网络和本地】
 TYPE_IMAGE_NETWORK = 0
@@ -47,7 +51,7 @@ def get_access_token():
     return access_token
 
 
-def identify_faces(pic_url, pic_type, url_fi):
+def identify_image(pic_url, pic_type, url_fi):
     """
     识别图片，返回识别到的人脸列表
     :param pic_url: 图片地址【网络图片或者本地图片】
@@ -68,10 +72,11 @@ def identify_faces(pic_url, pic_type, url_fi):
         image_type = 'BASE64'
 
     post_data = {
-        'image': image,
-        'image_type': image_type,
-        'face_field': 'facetype,gender,age,beauty',  # expression,faceshape,landmark,race,quality,glasses
-        'max_face_num': 2
+        'image': image
+        # 'image': image,
+        # 'image_type': image_type,
+        # 'face_field': 'facetype,gender,age,beauty',  # expression,faceshape,landmark,race,quality,glasses
+        # 'max_face_num': 2
     }
 
     response_fi = requests.post(url_fi, headers=headers, data=post_data)
@@ -83,12 +88,12 @@ def identify_faces(pic_url, pic_type, url_fi):
     if not json_fi_result or json_fi_result['error_msg'] != 'SUCCESS':
         return None
     else:
-        return json_fi_result['result']['face_list']
+        return json_fi_result["result"]
 
 
 # 此函数用于解析进行人脸图片，输出图片上的人脸的性别、年龄、颜值
 # 此函数调用get_access_token、identify_faces
-def parse_face_pic(pic_url, pic_type, access_token):
+def parse_image_pic(pic_url, pic_type, access_token):
     """
     人脸识别
     5秒之内
@@ -97,49 +102,36 @@ def parse_face_pic(pic_url, pic_type, access_token):
     :param access_token:
     :return:
     """
-    url_fi = 'https://aip.baidubce.com/rest/2.0/face/v3/detect?access_token=' + access_token
+    url_fi = 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + access_token
 
     # 调用identify_faces，获取人脸列表
-    json_faces = identify_faces(pic_url, pic_type, url_fi)
+    json_image = identify_image(pic_url, pic_type, url_fi)
 
-    if not json_faces:
-        print('未识别到人脸')
+    if not json_image:
+        print('未识别到物体')
         return None
     else:
         # 返回所有的人脸
-        return json_faces
+        return json_image
 
 
-def analysis_face(face_list):
+def analysis_image(result):
     """
     分析人脸，判断颜值是否达标
     18-30之间，女，颜值大于70
     :param face_list:识别的脸的列表
     :return:
     """
-    # 是否能找到高颜值的美女
-    find_belle = False
-    if face_list:
-        print('一共识别到%d张人脸，下面开始识别是否有美女~' % len(face_list))
-        for face in face_list:
-            # 判断是男、女
-            if face['gender']['type'] == 'female':
-                age = face['age']
-                beauty = face['beauty']
+    # 是否能找到旗帜
+    find_flag = False
+    print('一共识别到%d个物体，下面开始识别是否有旗帜~' % len(result))
+    for obj in result:
+        if obj["keyword"] == "旗帜":
+            find_flag = True
+            break
 
-                if 18 <= age <= 30 and beauty >= 70:
-                    # 满足条件，可以进行点赞、评论了
-                    print('颜值为:%d,及格，满足条件！' % beauty)
-                    find_belle = True
-                    break
-                else:
-                    print('颜值为:%d,不及格，继续~' % beauty)
-                    continue
-            else:
-                print('性别为男,继续~')
-                continue
-    else:
-        print('图片中没有发现人脸.')
+        else:
+            continue
 
-    return find_belle
+    return find_flag
 

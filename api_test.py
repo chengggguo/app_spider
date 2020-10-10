@@ -20,21 +20,19 @@ from datetime import datetime
 import shutil
 
 
-
+print("testing")
 
 
 
 if __name__ == '__main__':
 
     access_token = get_access_token()
+    print("in the loop")
 
 
-
-            # 截取屏幕有用的区域，过滤视频作者的头像、BGM作者的头像
-    screen_name = get_screen_shot_part_img('images/temp%d.jpg' % recognite_count)
 
             # 人脸识别
-    recognite_result = analysis_image(parse_image_pic(screen_name, TYPE_IMAGE_LOCAL, access_token))
+    recognite_result = analysis_image(parse_image_pic("testImage1.jpg", TYPE_IMAGE_LOCAL, access_token))
 
 
 

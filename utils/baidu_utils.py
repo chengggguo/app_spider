@@ -81,14 +81,11 @@ def identify_image(pic_url, pic_type, url_fi):
 
     response_fi = requests.post(url_fi, headers=headers, data=post_data)
     json_fi_result = json.loads(response_fi.text)
+    print("getting result")
 
     print(json_fi_result)
 
-    # 注意：这里识别到的，不一定是人脸
-    if not json_fi_result or json_fi_result['error_msg'] != 'SUCCESS':
-        return None
-    else:
-        return json_fi_result["result"]
+    return json_fi_result["result"]
 
 
 # 此函数用于解析进行人脸图片，输出图片上的人脸的性别、年龄、颜值

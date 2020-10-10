@@ -53,7 +53,7 @@ def get_access_token():
 
 def identify_image(pic_url, pic_type, url_fi):
     """
-    识别图片，返回识别到的人脸列表
+    识别图片，返回识别到的物体列表
     :param pic_url: 图片地址【网络图片或者本地图片】
     :param pic_type: 图片类型
     :param url_fi: 解析地址
@@ -73,10 +73,7 @@ def identify_image(pic_url, pic_type, url_fi):
 
     post_data = {
         'image': image
-        # 'image': image,
-        # 'image_type': image_type,
-        # 'face_field': 'facetype,gender,age,beauty',  # expression,faceshape,landmark,race,quality,glasses
-        # 'max_face_num': 2
+
     }
 
     response_fi = requests.post(url_fi, headers=headers, data=post_data)
@@ -88,11 +85,11 @@ def identify_image(pic_url, pic_type, url_fi):
     return json_fi_result["result"]
 
 
-# 此函数用于解析进行人脸图片，输出图片上的人脸的性别、年龄、颜值
+# 此函数用于解析进行图片里的物体
 # 此函数调用get_access_token、identify_faces
 def parse_image_pic(pic_url, pic_type, access_token):
     """
-    人脸识别
+    旗帜识别
     5秒之内
     :param pic_url:
     :param pic_type:
@@ -101,23 +98,21 @@ def parse_image_pic(pic_url, pic_type, access_token):
     """
     url_fi = 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + access_token
 
-    # 调用identify_faces，获取人脸列表
+    # 调用identify_faces，获取返回物体列表
     json_image = identify_image(pic_url, pic_type, url_fi)
 
     if not json_image:
         print('未识别到物体')
         return None
     else:
-        # 返回所有的人脸
+        # 返回所有的物体
         return json_image
 
 
 def analysis_image(result):
     """
-    分析人脸，判断颜值是否达标
-    18-30之间，女，颜值大于70
-    :param face_list:识别的脸的列表
-    :return:
+    分析是否包含旗帜
+    :return: true/false
     """
     # 是否能找到旗帜
     find_flag = False

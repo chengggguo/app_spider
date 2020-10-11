@@ -22,13 +22,11 @@ import json
 # 百度图像
 # https://console.bce.baidu.com
 
-appid = '22783415d'
-api_key = '9l0AEw61zdSjNEPkX1WKxEVI'
-secret_key = 'ZLAoRjDqdVsO8MlifVGjVK87G6LrHuAB'
 
-# appid = '你申请的appid'
-# api_key = '你申请的api_key'
-# secret_key = '你申请的secret_key'
+
+appid = '你申请的appid'
+api_key = '你申请的api_key'
+secret_key = '你申请的secret_key'
 
 # 图片类型【网络和本地】
 TYPE_IMAGE_NETWORK = 0

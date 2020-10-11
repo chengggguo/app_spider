@@ -72,7 +72,7 @@ if __name__ == '__main__':
         recognite_time_start = datetime.now()
 
         # 识别次数
-        recognite_count = 1
+        recognite_count = 2
 
         # 循环地去刷抖音
         while True:
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             # 第n次识别结束后的时间
             recognite_time_end = datetime.now()
 
-            # 这是一个美女
+            # 这是一个带有旗帜的视频
             if recognite_result:
                 save_video_met()
                 handle_count += 1

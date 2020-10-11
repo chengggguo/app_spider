@@ -87,7 +87,7 @@ if __name__ == '__main__':
             screen_name = get_screen_shot_part_img('images/temp%d.jpg' % recognite_count)
 
             # 人脸识别
-            recognite_result = analysis_face(parse_face_pic(screen_name, TYPE_IMAGE_LOCAL, access_token))
+            recognite_result = analysis_image(parse_image_pic(screen_name, TYPE_IMAGE_LOCAL, access_token))
 
             recognite_count += 1
 
@@ -98,14 +98,14 @@ if __name__ == '__main__':
             if recognite_result:
                 save_video_met()
                 handle_count += 1
-                print('识别到一个美女，继续下一个视频~')
+                print('识别到含有旗帜的视频，继续下一个视频~')
                 break
             else:
                 if (recognite_time_end - recognite_time_start).seconds < RECOGNITE_TOTAL_TIME:
                     print('继续识别~')
                     continue
                 else:
-                    print('超时！！！这是一条没有吸引力的视频！')
+                    print('超时！！！这是一条没有旗帜的视频！')
                     # 跳出里层循环
                     break
 

@@ -36,7 +36,7 @@ def save_video_met():
     :return:
     """
     # 分享
-    os.system("adb shell input tap 1000 1500")
+    os.system("adb shell input tap 1000 1300")
     time.sleep(0.05)
 
     # 保存到本地
@@ -59,34 +59,41 @@ if __name__ == '__main__':
     # 打开抖音
     start_my_app(package_name, activity_name)
 
-    time.sleep(5)
+    time.sleep(3)
 
     while True:
-        time.sleep(3)
+        time.sleep(2)
+        print("checking ad1")
         if is_a_ad():
             print('这是一条广告，过滤~')
             play_next_video()
-            time.sleep(3)
+            # time.sleep(3)
+        print("checking ad1 done")
 
         # 开始识别的时间
         recognite_time_start = datetime.now()
+        print("time started")
 
         # 识别次数
-        recognite_count = 2
+        recognite_count = 1
+        print("识别次数结束")
 
         # 循环地去刷抖音
         while True:
-            if is_a_ad():
-                print('这是一条广告，过滤~')
-                play_next_video()
-                time.sleep(3)
+            print("在里层loop")
+            # if is_a_ad():
+            #     print('这是一条广告，过滤~')
+            #     play_next_video()
+            #     time.sleep(3)
+            print("checking ad2 done")
             # 获取截图
             print('开始第%d次截图' % recognite_count)
 
             # 截取屏幕有用的区域，过滤视频作者的头像、BGM作者的头像
             screen_name = get_screen_shot_part_img('images/temp%d.jpg' % recognite_count)
 
-            # 人脸识别
+
+            # 图像识别
             recognite_result = analysis_image(parse_image_pic(screen_name, TYPE_IMAGE_LOCAL, access_token))
 
             recognite_count += 1

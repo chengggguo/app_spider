@@ -120,6 +120,9 @@ def analysis_image(result):
             find_flag = True
             break
 
+        elif obj["keyword"] == "旗杆":
+            find_flag = True
+            break
         else:
             continue
 

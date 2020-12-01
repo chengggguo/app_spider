@@ -1,4 +1,5 @@
 # app_spider
 for downloading footage with flag from 抖音
 reference来源于https://mp.weixin.qq.com/s?__biz=MzU1OTI0NjI1NQ==&mid=2247483911&idx=1&sn=cf6bb9c9db15c12566551d4bbc3fdd86&chksm=fc1b7cc7cb6cf5d177fa1f65837611674da5e0dd2095626a81192255ee6952971cba86c77029&mpshare=1&scene=1&srcid=0802hvmu84RRHbwL6PHqehdd&sharer_sharetime=1596372802926&sharer_shareid=e850ea47162e826430fb87bcbb3dd5c2&key=f4e53e261e827f632a3c79dc09cd7b8e167e6c93e9cd179c0e051673f2feaca7ab92a4082c86a5f49e0a73aa287b9b1c4c4073b1744214cb4c4913bf9165ad0b93c5b062013a0580086963057d9a1c2b8469e868626bbffd2dbc337f1d4242e8e49cb38088e76cfa3ca6293ecc3038802da4ac35ef85c639776e89917e37a83b&ascene=1&uin=NDExOTY4ODE1&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=AptcCA8hbqRbDGiCX5z82As%3D&pass_ticket=U8Yw3z2mMDLCUppZrb90HI3r0zORj4FpB1cROenE6lO6LdjO1pj0pe%2Bb%2BVhiNub2&wx_header=0
+
 代码基于https://github.com/xingag/app_spider/tree/master/%E6%8A%96%E9%9F%B3-%E8%8E%B7%E5%8F%96%E5%A5%BD%E7%9C%8B%E7%9A%84%E5%B0%8F%E5%A7%90%E5%A7%90
